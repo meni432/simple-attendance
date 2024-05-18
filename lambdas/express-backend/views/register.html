@@ -1,0 +1,15 @@
+<%- include('header.html') -%>
+
+<div>
+    <h1>QR Code</h1>
+    <img src="<%= qrContentUrl %>" height="400" width="400">
+</div>
+
+<h1>Attendances</h1>
+<ul id="users">
+  <% attendances.forEach(function(attendance){ %>
+    <li><%= attendance %></li>
+  <% }) %>
+</ul>
+
+<%- include('footer.html') -%>
