@@ -27,7 +27,7 @@ jobs:
       - name: Deploy attendance-cdk
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          command: 'deploy'
+          cdk_subcommand: 'deploy'
           cdk_args: '--require-approval never'
           working_dir: './attendance-cdk'
         env:
