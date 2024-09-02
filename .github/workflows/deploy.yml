@@ -19,7 +19,7 @@ jobs:
 
       - name: Compile and build lambdas
         run: npm ci
-        working-directory: lambdas
+        working-directory: ./lambdas/express-backend
 
       - name: Deploy attrandacne-cdk
         run: ccdk deploy --require-approval never
