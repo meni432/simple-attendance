@@ -17,10 +17,13 @@ jobs:
       - name: Install AWS CDK
         run: npm install -g aws-cdk
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Compile and build lambdas
         run: npm ci
-        working-directory: ../lambdas/express-backend
+        working-directory: ./lambdas/express-backend
 
       - name: Deploy attrandacne-cdk
         run: ccdk deploy --require-approval never
-        working-directory: ../attrandacne-cdk
+        working-directory: ./attrandacne-cdk
