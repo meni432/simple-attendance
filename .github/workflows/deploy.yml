@@ -19,7 +19,7 @@ jobs:
 
       - name: Compile and build lambdas
         run: |
-          cd lambdas/express-backend
+          cd /lambdas/express-backend
           npm ci
 
       - name: Deploy attrandacne-cdk
