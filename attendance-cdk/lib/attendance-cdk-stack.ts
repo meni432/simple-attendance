@@ -19,17 +19,17 @@ export class AttendanceCdkStack extends cdk.Stack {
     // create custom domain for api gateway with acm certificate arn
     const domainName = 'attendance.silkify.cloud';
     const baseUrl = `https://${domainName}`;
-    const certificateArn = 'arn:aws:acm:us-east-1:748860791422:certificate/d49004fb-7f63-4f44-a26b-264246e46a53';
+    const certificateArn = 'arn:aws:acm:us-east-1:748860791422:certificate/a601e44d-eeb9-45e4-9cae-ca00f9887247';
     const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', certificateArn);
 
     // lookup hosted zone
     const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
-      domainName: 'silkify.space',
+      domainName: 'silkify.cloud',
     });
 
     // create a secret for jwt secret
     const secret = new secretsmanager.Secret(this, 'attendance-global-secret', {
-      secretName: 'jwt-secret',
+      secretName: 'attendance-global-secret-jwt-secret',
       generateSecretString: {
         secretStringTemplate: JSON.stringify({  }),
         generateStringKey: 'jwtSecret',

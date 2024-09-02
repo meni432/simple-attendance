@@ -2,5 +2,9 @@
   "hosted-zone:account=748860791422:domainName=silkify.space:region=us-east-1": {
     "Id": "/hostedzone/Z044865628XIY8ABI5J0S",
     "Name": "silkify.space."
+  },
+  "hosted-zone:account=748860791422:domainName=silkify.cloud:region=us-east-1": {
+    "Id": "/hostedzone/Z086954235QJDH8UPSZ7Q",
+    "Name": "silkify.cloud."
   }
 }
