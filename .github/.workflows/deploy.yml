@@ -1,0 +1,27 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+      - name: Install AWS CDK
+      run: npm install -g aws-cdk
+
+      - name: Compile and build lambdas
+        run: |
+          cd lambdas/express-backend
+          npm ci
+
+      - name: Deploy attrandacne-cdk
+        run: cdk deploy
+        working-directory: attrandacne-cdk
