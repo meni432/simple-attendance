@@ -23,4 +23,4 @@ jobs:
 
       - name: Deploy attrandacne-cdk
         run: ccdk deploy --require-approval never
-        working-directory: ./attrandacne-cdk
+        working-directory: attrandacne-cdk
