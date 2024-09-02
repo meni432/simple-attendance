@@ -18,9 +18,8 @@ jobs:
         run: npm install -g aws-cdk
 
       - name: Compile and build lambdas
-        run: |
-          cd /lambdas/express-backend
-          npm ci
+        run: npm ci
+        working-directory: lambdas/express-backend
 
       - name: Deploy attrandacne-cdk
         run: ccdk deploy --require-approval never
