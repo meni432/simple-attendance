@@ -25,5 +25,8 @@ jobs:
         working-directory: ./lambdas/express-backend
 
       - name: Deploy attendance-cdk
-        run: cdk deploy --require-approval never
-        working-directory: ./attendance-cdk
+        - name: Deploy attendance-cdk
+          run: |
+            npm ci
+            cdk deploy --require-approval never
+          working-directory: ./attendance-cdk
