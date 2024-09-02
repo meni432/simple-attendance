@@ -14,8 +14,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install AWS CDK
-        run: npm install -g aws-cdk
+      # - name: Install AWS CDK
+      #   run: npm install -g aws-cdk
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,9 +25,10 @@ jobs:
         working-directory: ./lambdas/express-backend
 
       - name: Deploy attendance-cdk
-        run: |
-          npm ci
-          cdk deploy --require-approval never
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          command: 'deploy'
+          cdk_args: '--require-approval never'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
