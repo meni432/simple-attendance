@@ -28,4 +28,8 @@ jobs:
         run: |
           npm ci
           cdk deploy --require-approval never
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ variables.AWS_DEFAULT_REGION }}
         working-directory: ./attendance-cdk
