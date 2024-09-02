@@ -17,7 +17,7 @@ export class AttendanceCdkStack extends cdk.Stack {
     super(scope, id, props);
 
     // create custom domain for api gateway with acm certificate arn
-    const domainName = 'attendance.silkify.space';
+    const domainName = 'attendance.silkify.cloud';
     const baseUrl = `https://${domainName}`;
     const certificateArn = 'arn:aws:acm:us-east-1:748860791422:certificate/d49004fb-7f63-4f44-a26b-264246e46a53';
     const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', certificateArn);
