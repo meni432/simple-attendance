@@ -120,12 +120,12 @@ export class AttendanceCdkStack extends cdk.Stack {
       value: baseUrl,
     });
 
-    // const auth0Secret = new secretsmanager.Secret(this,
-    //   'auth-secret',
-    //   {
-    //     secretName: 'auth0-m2m-for-cdk',
-    //   }
-    // );
+    const auth0Secret = new secretsmanager.Secret(this,
+      'auth-secret',
+      {
+        secretName: 'auth0-m2m-for-cdk',
+      }
+    );
 
     // const resourceServer = new ResourceServer(this, "ResourceServer", {
     //   apiSecret: auth0Secret,
