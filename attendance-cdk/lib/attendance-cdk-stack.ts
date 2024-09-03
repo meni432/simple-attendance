@@ -59,7 +59,7 @@ export class AttendanceCdkStack extends cdk.Stack {
 
     // deploy lambda function add dynamo table name to env variable
     const backendLambda = new lambda.Function(this, 'attendanceBackend', {
-      runtime: lambda.Runtime.NODEJS_LATEST,
+      runtime: lambda.Runtime.NODEJS_20_X,
       handler: 'index.handler',
       code: lambda.Code.fromAsset('../lambdas/express-backend'),
       environment: {
