@@ -127,14 +127,14 @@ export class AttendanceCdkStack extends cdk.Stack {
       }
     );
 
-    // const resourceServer = new ResourceServer(this, "ResourceServer", {
-    //   apiSecret: auth0Secret,
-    //   name: "web-api",
-    //   identifier: "web-api",
-    //   tokenLifetime: cdk.Duration.minutes(2),
-    //   enforcePolicies: true,
-    //   allowOfflineAccess: true,
-    // });
+    const resourceServer = new ResourceServer(this, "ResourceServer", {
+      apiSecret: auth0Secret,
+      name: "web-api",
+      identifier: "web-api",
+      tokenLifetime: cdk.Duration.minutes(2),
+      enforcePolicies: true,
+      allowOfflineAccess: true,
+    });
 
     // const webClient = new Client(this, "WebClient", {
     //   apiSecret: auth0Secret,
