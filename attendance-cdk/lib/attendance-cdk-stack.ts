@@ -10,6 +10,13 @@ import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as route53Targets from 'aws-cdk-lib/aws-route53-targets';
+import {
+  ResourceServer,
+  Client,
+  ClientGrant,
+  Trigger,
+  Action,
+} from "@flit/cdk-auth0";
 
 export class AttendanceCdkStack extends cdk.Stack {
 
@@ -111,6 +118,48 @@ export class AttendanceCdkStack extends cdk.Stack {
     // output the base url
     new cdk.CfnOutput(this, 'Base URL', {
       value: baseUrl,
+    });
+
+    const auth0Secret = new secretsmanager.Secret(this,
+      'auth-secret',
+      {
+        secretName: 'auth0-m2m-for-cdk',
+      }
+    );
+
+    const resourceServer = new ResourceServer(this, "ResourceServer", {
+      apiSecret: auth0Secret,
+      name: "web-api",
+      identifier: "web-api",
+      tokenLifetime: cdk.Duration.minutes(2),
+      enforcePolicies: true,
+      allowOfflineAccess: true,
+    });
+
+    const webClient = new Client(this, "WebClient", {
+      apiSecret: auth0Secret,
+      name: "web-client",
+      appType: "regular_web",
+      isFirstParty: true,
+      tokenEndpointAuthMethod: "client_secret_basic",
+      initiateLoginUri: "https://test.com/auth",
+      callbacks: ["https://test.com/auth/callback"],
+      allowedLogoutUrls: ["https://test.com"],
+      oidcConformant: true,
+      refreshToken: {
+        rotationType: "rotating",
+        expirationType: "expiring",
+        tokenLifetime: cdk.Duration.days(7),
+        idleTokenLifetime: cdk.Duration.days(1),
+      },
+      grantTypes: ["implicit", "authorization_code", "refresh_token"],
+    });
+
+    new ClientGrant(this, "ClientGrant", {
+      apiSecret: auth0Secret,
+      client: webClient,
+      audience: resourceServer,
+      scope: [],
     });
   }
 }
